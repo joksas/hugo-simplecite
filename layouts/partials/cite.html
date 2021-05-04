@@ -7,18 +7,7 @@
 {{- errorf "No entry ID was provided: %s" .Position -}}
 {{- end -}}
 
-{{- $bibFilePath := "" }}
-{{- $bibEntries := "" -}}
-
-{{/* Check for a JSON file in the leaf bundle. */}}
-{{- $pageResource := .Page.Resources.GetMatch "*bib*.json" -}}
-{{- if $pageResource }}
-{{- $constructedBibResource := printf "content/%s%s" .Page.File.Dir $pageResource.Name }}
-{{- $bibFilePath = $constructedBibResource }}
-{{- $bibEntries = getJSON $bibFilePath -}}
-{{- else -}}
-{{- errorf "No JSON file was found: %s" .Position -}}
-{{- end }}
+{{- $bibEntries := partial "get-bib-entries" . -}}
 
 {{- $numCitedEntries := 0 -}}
 {{- with (.Page.Scratch.Get "citedEntries") -}}
