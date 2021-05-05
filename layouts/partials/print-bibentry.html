@@ -10,7 +10,7 @@
 {{- end -}}
 
 {{- $stylePath := "styles/ieee/main.html" -}}
-{{- $bibEntries := partial "get-bib-entries" $context -}}
-{{- $bibEntry := partial "get-bib-entry" (dict "context" $context "bibEntries" $bibEntries "entryId" $entryId) -}}
+{{- $bibEntries := partial "get-bibentries" $context -}}
+{{- $bibEntry := partial "get-bibentry" (dict "context" $context "bibEntries" $bibEntries "entryId" $entryId) -}}
 
 {{- partial $stylePath (dict "context" $context "bibEntry" $bibEntry) -}}

@@ -7,7 +7,7 @@
 {{- errorf "No entry ID was provided: %s" .Position -}}
 {{- end -}}
 
-{{- $bibEntries := partial "get-bib-entries" . -}}
+{{- $bibEntries := partial "get-bibentries" . -}}
 
 {{- $numCitedEntries := 0 -}}
 {{- with (.Page.Scratch.Get "citedEntries") -}}
@@ -34,7 +34,7 @@
 {{- end -}}
 
 {{- with $referenceIdx -}}
-[<a href="#reference-{{ . }}" title="{{ partial "bibentry" (dict "context" $context) | plainify | htmlUnescape }}">{{ . }}</a>]
+[<a href="#reference-{{ . }}" title="{{ partial "print-bibentry" (dict "context" $context) | plainify | htmlUnescape }}">{{ . }}</a>]
 {{- end -}}
 
 {{- else -}}
