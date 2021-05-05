@@ -1,6 +1,6 @@
 {{- $bibentries := "" -}}
 
-{{- $pageResource := .Page.Resources.GetMatch "*bib*.json" -}}
+{{- $pageResource := .Page.Resources.GetMatch "bib.json" -}}
 {{- if $pageResource }}
 {{- $constructedBibResource := printf "content/%s%s" .Page.File.Dir $pageResource.Name }}
 {{- $bibfilePath := $constructedBibResource }}
