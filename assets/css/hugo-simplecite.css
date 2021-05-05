@@ -6,3 +6,15 @@ ol.hugo-simplecite-vancouver > li {
 ol.hugo-simplecite-vancouver > li::marker {
   content: "[" counter(list) "]  ";
 }
+
+/* Break long strings of text (especially in hyperlinks) */
+.hugo-simplecite-break-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
