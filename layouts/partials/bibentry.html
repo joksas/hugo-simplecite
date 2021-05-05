@@ -1,0 +1,14 @@
+{{- $context := . -}}
+
+{{- $entryId := "" -}}
+{{- with .Get 0 -}}
+{{- $entryId = . -}}
+{{- else -}}
+{{- errorf "No entry ID was provided: %s" .Position -}}
+{{- end -}}
+
+{{- $stylePath := "styles/ieee/main.html" -}}
+{{- $bibEntries := partial "get-bib-entries" . -}}
+{{- $bibEntry := partial "get-bib-entry" (dict "context" $context "bibEntries" $bibEntries "entryId" $entryId) -}}
+
+{{- partial $stylePath (dict "context" $context "bibEntry" $bibEntry) -}}
