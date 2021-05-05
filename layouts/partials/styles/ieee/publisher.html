@@ -1,0 +1,9 @@
+{{ with index . "publisher-place" -}}
+{{ . }}
+{{- end -}}
+{{ if (and (index . "publisher-place") (index . "publisher")) -}}
+:&#32;
+{{- end -}}
+{{- with index . "publisher" -}}
+{{ . }}
+{{- end -}}

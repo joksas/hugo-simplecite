@@ -1,0 +1,36 @@
+{{- $bibEntries := index . "bibEntries" -}}
+{{- $personFieldName := index . "personFieldName" -}}
+
+{{- with (index $bibEntries $personFieldName) -}}
+{{- $numPersons := len . -}}
+{{- range $personIdx, $person := . -}}
+
+{{- with $person.literal -}}
+
+{{ . }}
+
+{{- else -}}
+
+{{- with $person.given -}}
+{{ substr . 0 1 }}.&#32;
+{{- end -}}
+
+{{- with $person.secondInitial -}}
+{{- substr . 0 1 -}}.&#32;
+{{- end -}}
+
+{{- with $person.family -}}
+{{ . }}
+{{- end -}} 
+
+{{- end -}}
+
+{{- if and (gt $numPersons 1) (lt (add $personIdx 2) $numPersons) -}}
+,&#32;
+{{- end -}}
+{{- if eq $numPersons (add $personIdx 2) -}}
+{{ if ne $numPersons 2 }},{{ end }} and&#32;
+{{- end -}}
+
+{{- end -}}
+{{- end -}}

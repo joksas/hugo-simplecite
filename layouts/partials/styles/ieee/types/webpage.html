@@ -1,0 +1,15 @@
+{{- with partial "styles/ieee/people" (dict "bibEntries" . "personFieldName" "author") -}}
+{{ . }},&#32;
+{{- end -}}
+
+{{- with partial "styles/ieee/full-title" . -}}
+"{{ . }},"&#32;
+{{- end -}}
+
+{{- with index . "publisher" -}}
+<i>{{- . -}}</i>,&#32;
+{{- end }}
+
+{{- partial "styles/ieee/year-month-day" (dict "bibEntries" . "timeFieldName" "issued") -}}.&#32;
+
+{{- partial "styles/ieee/doi-url" . -}}

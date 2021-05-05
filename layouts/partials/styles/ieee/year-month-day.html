@@ -1,0 +1,16 @@
+{{- $context := . -}}
+{{- $bibEntries := index . "bibEntries" -}}
+{{- $timeFieldName := index . "timeFieldName" -}}
+
+{{- with index $bibEntries $timeFieldName -}}
+{{- with index . "date-parts" -}}
+{{- with index . 0 -}}
+{{- if (ge (len .) 3) -}}
+{{- $date := (print (index . 0) "-" (printf "%02.f" (index . 1)) "-" (printf "%02.f" (index . 2))) }}
+{{ dateFormat "Jan. 2, 2006" $date }}
+{{- else -}}
+{{- partial "styles/ieee/year-month" $context -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

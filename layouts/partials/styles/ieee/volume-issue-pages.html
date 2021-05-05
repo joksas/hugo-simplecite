@@ -1,0 +1,13 @@
+{{- $context := . -}}
+
+{{- with index . "volume" -}}
+vol. {{ . }}{{ with (or (index $context "issue") (index $context "page")) }},&#32;{{ end }}
+{{- end -}}
+
+{{- with index . "issue" -}}
+no. {{ . }}{{ with (index $context "page") }},&#32;{{ end }}
+{{- end -}}
+
+{{- with index . "page" -}}
+p{{ if in . "-" }}p{{ end }}. {{ replace . "-" "–" }}
+{{- end -}}

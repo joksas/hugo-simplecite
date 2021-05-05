@@ -1,0 +1,13 @@
+{{- $bibEntries := index . "bibEntries" -}}
+{{- $timeFieldName := index . "timeFieldName" -}}
+
+{{- with index $bibEntries $timeFieldName -}}
+{{- with index . "date-parts" -}}
+{{- with index . 0 -}}
+{{- if (ge (len .) 1) -}}
+{{- $date := (print (index . 0) "-01-01") -}}
+{{ dateFormat "2006" $date }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
