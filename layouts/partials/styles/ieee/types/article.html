@@ -10,7 +10,9 @@
 <em>{{ . }}</em>,&#32;
 {{- end -}}
 
-{{- partial "styles/ieee/parts/volume-issue-pages" . -}},&#32;
+{{- with partial "styles/ieee/parts/volume-issue-pages" . -}}
+{{ . }},&#32;
+{{- end -}}
 
 {{- partial "styles/ieee/parts/year" (dict "bibEntries" . "timeFieldName" "issued") -}}.&#32;
 
