@@ -10,6 +10,8 @@
 <i>{{- . -}}</i>,&#32;
 {{- end }}
 
-{{- partial "styles/ieee/parts/year-month-day" (dict "bibentries" . "timeFieldName" "issued") -}}.&#32;
+{{- with partial "styles/ieee/parts/year-month-day" (dict "bibentries" . "timeFieldName" "issued") -}}
+{{ . }}.&#32;
+{{- end -}}
 
 {{- partial "styles/ieee/parts/doi-url" . -}}
