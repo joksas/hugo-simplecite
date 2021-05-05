@@ -9,13 +9,15 @@
 {{- end -}}
 
 {{- with partial "styles/ieee/parts/full-title" . -}}
-<em>{{ . }}</em>.&#32;
+<em>{{ . }}</em>
 {{- end -}}
 
-{{- partial "styles/ieee/parts/publisher" . -}}
+{{- with partial "styles/ieee/parts/publisher" . -}}
+.&#32;{{ . }}
+{{- end -}}
 
 {{- with partial "styles/ieee/parts/year" (dict "bibEntries" . "timeFieldName" "issued") -}}
-, {{ . }}.
+, {{ . }}.&#32;
 {{- end -}}
 
 {{- partial "styles/ieee/parts/doi-url" . -}}
