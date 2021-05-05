@@ -9,6 +9,8 @@ https://ieee-dataport.org/sites/default/files/analysis/27/IEEE%20Citation%20Guid
 {{- partial "styles/ieee/types/book" $bibentry -}}
 {{- else if (eq $bibentry.type "chapter") -}}
 {{- partial "styles/ieee/types/chapter" $bibentry -}}
+{{- else if (eq $bibentry.type "broadcast") -}}
+{{- partial "styles/ieee/types/broadcast" $bibentry -}}
 {{- else if or (eq $bibentry.type "article-journal") (eq $bibentry.type "article") -}}
 {{- partial "styles/ieee/types/article" $bibentry -}}
 {{- else if (eq $bibentry.type "paper-conference") -}}

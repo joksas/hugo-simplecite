@@ -1,0 +1,17 @@
+{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
+{{ . }},&#32;
+{{- end -}}
+
+{{- with partial "styles/ieee/parts/full-title" . -}}
+"{{ . }},"&#32;
+{{- end -}}
+
+{{- with index . "collection-title" -}}
+<em>{{ . }}</em>,&#32;
+{{- end -}}
+
+{{- with partial "styles/ieee/parts/year" (dict "bibentries" . "timeFieldName" "issued") -}}
+{{ . }}.&#32;
+{{- end -}}
+
+{{- partial "styles/ieee/parts/doi-url" . -}}
