@@ -1,0 +1,9 @@
+{{- $context := . -}}
+
+{{- with (.Page.Scratch.Get "citedEntries") -}}
+<ol>
+{{- range $referenceIdx, $bibentry := . -}}
+<li id="reference-{{ add $referenceIdx 1 }}">{{ partial "bibentry" (dict "context" $context "entryId" $bibentry.id) }}</li>
+{{- end -}}
+</ol>
+{{- end -}}

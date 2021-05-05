@@ -34,7 +34,7 @@
 {{- end -}}
 
 {{- with $referenceIdx -}}
-[<a href="#reference-{{ . }}" title="{{ partial "bibentry" $context | plainify | htmlUnescape }}">{{ . }}</a>]
+[<a href="#reference-{{ . }}" title="{{ partial "bibentry" (dict "context" $context) | plainify | htmlUnescape }}">{{ . }}</a>]
 {{- end -}}
 
 {{- else -}}
