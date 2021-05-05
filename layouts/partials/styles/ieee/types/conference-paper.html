@@ -13,9 +13,7 @@ In Proc. {{ . }},&#32;
 {{- partial "styles/ieee/parts/year" (dict "bibEntries" . "timeFieldName" "issued") -}}
 
 {{- with partial "styles/ieee/parts/volume-issue-pages" . -}}
-{{ . }}&#32;
+, {{ . }}.&#32;
 {{- end -}}
-
-.&#32;
 
 {{- partial "styles/ieee/parts/doi-url" . -}}
