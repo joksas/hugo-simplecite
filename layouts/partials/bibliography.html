@@ -1,0 +1,11 @@
+{{- $context := . -}}
+
+{{- $bibEntries := partial "get-bib-entries" $context -}}
+
+{{- with $bibEntries -}}
+<ul>
+{{- range $bibentryIdx, $bibentry := . -}}
+<li{{ with index $bibentry "id" }} id="bibentry-{{ . }}"{{ end }}>{{ partial "bibentry" (dict "context" $context "entryId" $bibentry.id) }}</li>
+{{- end -}}
+</ul>
+{{- end -}}
