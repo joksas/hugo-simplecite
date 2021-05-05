@@ -1,21 +1,21 @@
 {{- if index . "author" -}}
-{{- with partial "styles/ieee/people" (dict "bibEntries" . "personFieldName" "author") -}}
+{{- with partial "styles/ieee/parts/people" (dict "bibEntries" . "personFieldName" "author") -}}
 {{ . }},&#32;
 {{- end -}}
 {{- else if index . "editor" -}}
-{{- with partial "styles/ieee/people" (dict "bibEntries" . "personFieldName" "editor") -}}
+{{- with partial "styles/ieee/parts/people" (dict "bibEntries" . "personFieldName" "editor") -}}
 {{ . }}, Eds.,&#32;
 {{- end -}}
 {{- end -}}
 
-{{- with partial "styles/ieee/full-title" . -}}
+{{- with partial "styles/ieee/parts/full-title" . -}}
 <em>{{ . }}</em>.&#32;
 {{- end -}}
 
-{{- partial "styles/ieee/publisher" . -}}
+{{- partial "styles/ieee/parts/publisher" . -}}
 
-{{- with partial "styles/ieee/year" (dict "bibEntries" . "timeFieldName" "issued") -}}
+{{- with partial "styles/ieee/parts/year" (dict "bibEntries" . "timeFieldName" "issued") -}}
 , {{ . }}.
 {{- end -}}
 
-{{- partial "styles/ieee/doi-url" . -}}
+{{- partial "styles/ieee/parts/doi-url" . -}}
