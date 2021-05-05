@@ -1,36 +1,36 @@
 {{- $context := . -}}
 
-{{- $entryId := "" -}}
+{{- $bibentryId := "" -}}
 {{- with .Get 0 -}}
-{{- $entryId = . -}}
+{{- $bibentryId = . -}}
 {{- else -}}
-{{- errorf "No entry ID was provided: %s" .Position -}}
+{{- errorf "No bibliographic entry ID was provided: %s" .Position -}}
 {{- end -}}
 
-{{- $bibEntries := partial "get-bibentries" . -}}
+{{- $bibentries := partial "get-bibentries" . -}}
 
-{{- $numCitedEntries := 0 -}}
-{{- with (.Page.Scratch.Get "citedEntries") -}}
-{{- $numCitedEntries = len . -}}
+{{- $numCitedBibentries := 0 -}}
+{{- with (.Page.Scratch.Get "citedBibentries") -}}
+{{- $numCitedBibentries = len . -}}
 {{- end -}}
 
-{{- range where $bibEntries "id" "eq" $entryId -}}
+{{- range where $bibentries "id" "eq" $bibentryId -}}
 
 {{- $wasAlreadyCited := false -}}
-{{- $entry := . -}}
+{{- $bibentry := . -}}
 {{- $referenceIdx := 0 -}}
 
 {{- with ($context.Page.Scratch.Get "referenceIdxs") -}}
-{{- if isset . $entryId -}} 
-{{- $referenceIdx = index . $entryId -}}
+{{- if isset . $bibentryId -}} 
+{{- $referenceIdx = index . $bibentryId -}}
 {{- $wasAlreadyCited = true -}}
 {{- end -}}
 {{- end -}}
 
 {{- if not $wasAlreadyCited -}}
-{{- $context.Page.Scratch.Add "citedEntries" (slice $entry) -}}
-{{- $referenceIdx = (add $numCitedEntries 1) -}}
-{{- $.Page.Scratch.SetInMap "referenceIdxs" $entryId $referenceIdx -}}
+{{- $context.Page.Scratch.Add "citedBibentries" (slice $bibentry) -}}
+{{- $referenceIdx = (add $numCitedBibentries 1) -}}
+{{- $.Page.Scratch.SetInMap "referenceIdxs" $bibentryId $referenceIdx -}}
 {{- end -}}
 
 {{- with $referenceIdx -}}
@@ -38,5 +38,5 @@
 {{- end -}}
 
 {{- else -}}
-{{- errorf "Could not find bibliographic entry with ID '%s': %s" $entryId .Position -}}
+{{- errorf "Could not find bibliographic entry with ID '%s': %s" $bibentryId .Position -}}
 {{- end -}}

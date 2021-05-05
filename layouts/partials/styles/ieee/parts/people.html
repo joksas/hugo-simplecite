@@ -1,7 +1,7 @@
-{{- $bibEntries := index . "bibEntries" -}}
+{{- $bibentries := index . "bibentries" -}}
 {{- $personFieldName := index . "personFieldName" -}}
 
-{{- with (index $bibEntries $personFieldName) -}}
+{{- with (index $bibentries $personFieldName) -}}
 {{- $numPersons := len . -}}
 {{- range $personIdx, $person := . -}}
 

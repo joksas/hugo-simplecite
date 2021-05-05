@@ -1,9 +1,9 @@
 {{- $context := . -}}
 
-{{- with (.Page.Scratch.Get "citedEntries") -}}
+{{- with (.Page.Scratch.Get "citedBibentries") -}}
 <ol>
 {{- range $referenceIdx, $bibentry := . -}}
-<li id="reference-{{ add $referenceIdx 1 }}">{{ partial "print-bibentry" (dict "context" $context "entryId" $bibentry.id) }}</li>
+<li id="reference-{{ add $referenceIdx 1 }}">{{ partial "print-bibentry" (dict "context" $context "bibentryId" $bibentry.id) }}</li>
 {{- end -}}
 </ol>
 {{- end -}}

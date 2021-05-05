@@ -1,13 +1,12 @@
-{{- $bibEntries := "" -}}
+{{- $bibentries := "" -}}
 
-{{/* Check for a JSON file in the leaf bundle. */}}
 {{- $pageResource := .Page.Resources.GetMatch "*bib*.json" -}}
 {{- if $pageResource }}
 {{- $constructedBibResource := printf "content/%s%s" .Page.File.Dir $pageResource.Name }}
-{{- $bibFilePath := $constructedBibResource }}
-{{- $bibEntries = getJSON $bibFilePath -}}
+{{- $bibfilePath := $constructedBibResource }}
+{{- $bibentries = getJSON $bibfilePath -}}
 {{- else -}}
 {{- errorf "No JSON file was found: %s" .Position -}}
 {{- end -}}
 
-{{- return $bibEntries -}}
+{{- return $bibentries -}}

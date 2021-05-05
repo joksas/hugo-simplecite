@@ -1,16 +1,16 @@
 {{- $context := index . "context" -}}
-{{- $bibEntries := index . "bibEntries" -}}
-{{- $entryId := index . "entryId" -}}
+{{- $bibentries := index . "bibentries" -}}
+{{- $bibentryId := index . "bibentryId" -}}
 
-{{- $bibEntry := "" -}}
-{{- $relevantBibEntries := where $bibEntries "id" $entryId -}}
-{{- $numRelevantBibEntries := len $relevantBibEntries -}}
-{{- if (eq $numRelevantBibEntries 0) -}}
-{{- errorf "No entries with ID '%s' were found: %s" $entryId $context.Position -}}
-{{- else if (gt $numRelevantBibEntries 1) -}}
-{{- errorf "More than one entry with ID '%s' was found: %s" $entryId $context.Position -}}
-{{- else if (eq $numRelevantBibEntries 1) -}}
-{{- $bibEntry = index $relevantBibEntries 0 -}}
+{{- $bibentry := "" -}}
+{{- $relevantBibentries := where $bibentries "id" $bibentryId -}}
+{{- $numRelevantBibentries := len $relevantBibentries -}}
+{{- if (eq $numRelevantBibentries 0) -}}
+{{- errorf "No entries with ID '%s' were found: %s" $bibentryId $context.Position -}}
+{{- else if (gt $numRelevantBibentries 1) -}}
+{{- errorf "More than one bibliographic entry with ID '%s' was found: %s" $bibentryId $context.Position -}}
+{{- else if (eq $numRelevantBibentries 1) -}}
+{{- $bibentry = index $relevantBibentries 0 -}}
 {{- end -}}
 
-{{- return $bibEntry -}}
+{{- return $bibentry -}}

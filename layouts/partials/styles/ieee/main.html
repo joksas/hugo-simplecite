@@ -3,19 +3,19 @@ https://ieee-dataport.org/sites/default/files/analysis/27/IEEE%20Citation%20Guid
 */}}
 
 {{- $context := index . "context" -}}
-{{- $bibEntry := index . "bibEntry" -}}
+{{- $bibentry := index . "bibentry" -}}
 
-{{- if eq $bibEntry.type "book" -}}
-{{- partial "styles/ieee/types/book" $bibEntry -}}
-{{- else if (eq $bibEntry.type "chapter") -}}
-{{- partial "styles/ieee/types/chapter" $bibEntry -}}
-{{- else if or (eq $bibEntry.type "article-journal") (eq $bibEntry.type "article") -}}
-{{- partial "styles/ieee/types/article" $bibEntry -}}
-{{- else if (eq $bibEntry.type "paper-conference") -}}
-{{- partial "styles/ieee/types/conference-paper" $bibEntry -}}
-{{- else if eq $bibEntry.type "webpage" -}}
-{{- partial "styles/ieee/types/webpage" $bibEntry -}}
+{{- if eq $bibentry.type "book" -}}
+{{- partial "styles/ieee/types/book" $bibentry -}}
+{{- else if (eq $bibentry.type "chapter") -}}
+{{- partial "styles/ieee/types/chapter" $bibentry -}}
+{{- else if or (eq $bibentry.type "article-journal") (eq $bibentry.type "article") -}}
+{{- partial "styles/ieee/types/article" $bibentry -}}
+{{- else if (eq $bibentry.type "paper-conference") -}}
+{{- partial "styles/ieee/types/conference-paper" $bibentry -}}
+{{- else if eq $bibentry.type "webpage" -}}
+{{- partial "styles/ieee/types/webpage" $bibentry -}}
 {{- else -}}
-{{- warnf "Bibliography type '%s' is not implemented. Defaulting to type 'book': %s" $bibEntry.type $context.Position -}}
-{{- partial "styles/ieee/types/book" $bibEntry -}}
+{{- warnf "Bibliography type '%s' is not implemented. Defaulting to type 'book': %s" $bibentry.type $context.Position -}}
+{{- partial "styles/ieee/types/book" $bibentry -}}
 {{- end -}}

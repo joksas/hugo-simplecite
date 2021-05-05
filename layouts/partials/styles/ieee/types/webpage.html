@@ -1,4 +1,4 @@
-{{- with partial "styles/ieee/parts/people" (dict "bibEntries" . "personFieldName" "author") -}}
+{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
 {{ . }},&#32;
 {{- end -}}
 
@@ -10,6 +10,6 @@
 <i>{{- . -}}</i>,&#32;
 {{- end }}
 
-{{- partial "styles/ieee/parts/year-month-day" (dict "bibEntries" . "timeFieldName" "issued") -}}.&#32;
+{{- partial "styles/ieee/parts/year-month-day" (dict "bibentries" . "timeFieldName" "issued") -}}.&#32;
 
 {{- partial "styles/ieee/parts/doi-url" . -}}

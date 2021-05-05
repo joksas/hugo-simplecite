@@ -1,16 +1,16 @@
 {{- $context := index . "context" -}}
 
-{{- $entryId := "" -}}
-{{- if index . "entryId" -}}
-{{- $entryId = index . "entryId" -}}
+{{- $bibentryId := "" -}}
+{{- if index . "bibentryId" -}}
+{{- $bibentryId = index . "bibentryId" -}}
 {{- else if $context.Get 0 -}}
-{{- $entryId = $context.Get 0 -}}
+{{- $bibentryId = $context.Get 0 -}}
 {{- else -}}
-{{- errorf "No entry ID was provided: %s" .Position -}}
+{{- errorf "No bibliographic entry ID was provided: %s" .Position -}}
 {{- end -}}
 
 {{- $stylePath := "styles/ieee/main.html" -}}
-{{- $bibEntries := partial "get-bibentries" $context -}}
-{{- $bibEntry := partial "get-bibentry" (dict "context" $context "bibEntries" $bibEntries "entryId" $entryId) -}}
+{{- $bibentries := partial "get-bibentries" $context -}}
+{{- $bibentry := partial "get-bibentry" (dict "context" $context "bibentries" $bibentries "bibentryId" $bibentryId) -}}
 
-{{- partial $stylePath (dict "context" $context "bibEntry" $bibEntry) -}}
+{{- partial $stylePath (dict "context" $context "bibentry" $bibentry) -}}

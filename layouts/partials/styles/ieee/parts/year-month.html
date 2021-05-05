@@ -1,8 +1,8 @@
 {{- $context := . -}}
-{{- $bibEntries := index . "bibEntries" -}}
+{{- $bibentries := index . "bibentries" -}}
 {{- $timeFieldName := index . "timeFieldName" -}}
 
-{{- with index $bibEntries $timeFieldName -}}
+{{- with index $bibentries $timeFieldName -}}
 {{- with index . "date-parts" -}}
 {{- with index . 0 -}}
 {{- if (ge (len .) 2) -}}

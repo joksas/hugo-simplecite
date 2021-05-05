@@ -1,9 +1,9 @@
 {{- if index . "author" -}}
-{{- with partial "styles/ieee/parts/people" (dict "bibEntries" . "personFieldName" "author") -}}
+{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
 {{ . }},&#32;
 {{- end -}}
 {{- else if index . "editor" -}}
-{{- with partial "styles/ieee/parts/people" (dict "bibEntries" . "personFieldName" "editor") -}}
+{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "editor") -}}
 {{ . }}, Eds.,&#32;
 {{- end -}}
 {{- end -}}
@@ -16,7 +16,7 @@
 .&#32;{{ . }}
 {{- end -}}
 
-{{- with partial "styles/ieee/parts/year" (dict "bibEntries" . "timeFieldName" "issued") -}}
+{{- with partial "styles/ieee/parts/year" (dict "bibentries" . "timeFieldName" "issued") -}}
 , {{ . }}.&#32;
 {{- end -}}
 
