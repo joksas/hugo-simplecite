@@ -3,9 +3,9 @@
 {{- $bibentries := partial "get-bibentries" $context -}}
 
 {{- with $bibentries -}}
-<ul>
+<ul class="hugo-simplecite-bibliography-list">
 {{- range $bibentryIdx, $bibentry := . -}}
-<li{{ with index $bibentry "id" }} id="bibentry-{{ . }}"{{ end }}>{{ partial "print-bibentry" (dict "context" $context "bibentryId" $bibentry.id) }}</li>
+<li class="hugo-simplecite-bibliography-list-item" {{ with index $bibentry "id" }} id="bibentry-{{ . }}"{{ end }}>{{ partial "print-bibentry" (dict "context" $context "bibentryId" $bibentry.id) }}</li>
 {{- end -}}
 </ul>
 {{- end -}}

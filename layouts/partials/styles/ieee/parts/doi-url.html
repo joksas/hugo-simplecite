@@ -1,7 +1,7 @@
 {{- if .DOI -}}
-doi:<a class="hugo-simplecite-break-words" rel="noopener" target="_blank" href="https://doi.org/{{ .DOI }}">{{ .DOI }}</a>
+doi:<a class="hugo-simplecite-doi-hyperlink" rel="noopener" target="_blank" href="https://doi.org/{{ .DOI }}">{{ .DOI }}</a>
 {{- else if .URL -}}
-[Online]. Available: <a class="hugo-simplecite-break-words" rel="noopener" target="_blank" href="{{ .URL }}">{{ .URL }}</a>
+[Online]. Available: <a class="hugo-simplecite-url-hyperlink" rel="noopener" target="_blank" href="{{ .URL }}">{{ .URL }}</a>
 {{- with partial "styles/ieee/parts/accessed" . -}}
 &#32;{{ . }}
 {{- end -}}

@@ -1,9 +1,9 @@
 {{- $context := . -}}
 
 {{- with (.Page.Scratch.Get "citedBibentries") -}}
-<ol class="hugo-simplecite-vancouver">
+<ol class="hugo-simplecite-reference-list">
 {{- range $referenceIdx, $bibentry := . -}}
-<li id="reference-{{ add $referenceIdx 1 }}">{{ partial "print-bibentry" (dict "context" $context "bibentryId" $bibentry.id) }}</li>
+<li class="hugo-simplecite-reference-list-item" id="reference-{{ add $referenceIdx 1 }}">{{ partial "print-bibentry" (dict "context" $context "bibentryId" $bibentry.id) }}</li>
 {{- end -}}
 </ol>
 {{- end -}}

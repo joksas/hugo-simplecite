@@ -7,6 +7,10 @@ ol.hugo-simplecite-vancouver > li::marker {
   content: "[" counter(list) "]  ";
 }
 
+.hugo-simplecite-reference-list {
+  @extend .hugo-simplecite-vancouver;
+}
+
 /* Break long strings of text (especially in hyperlinks) */
 .hugo-simplecite-break-words {
   overflow-wrap: break-word;
@@ -17,4 +21,8 @@ ol.hugo-simplecite-vancouver > li::marker {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+.hugo-simplecite-doi-hyperlink, .hugo-simplecite-url-hyperlink {
+  @extend .hugo-simplecite-break-words;
 }
