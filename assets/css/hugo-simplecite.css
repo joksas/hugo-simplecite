@@ -1,0 +1,8 @@
+/* Put square brackets around indices in the reference list */
+ol.hugo-simplecite-vancouver > li {
+  list-style: none;
+  counter-increment: list;
+}
+ol.hugo-simplecite-vancouver > li::marker {
+  content: "[" counter(list) "]  ";
+}
