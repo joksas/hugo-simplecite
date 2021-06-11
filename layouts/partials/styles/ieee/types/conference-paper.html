@@ -3,7 +3,7 @@
 {{- end -}}
 
 {{- with partial "styles/ieee/parts/full-title" . -}}
-"{{ . }},"&#32;
+<q>{{ . }},</q>&#32;
 {{- end -}}
 
 {{- with index . "container-title" -}}
