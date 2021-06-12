@@ -64,28 +64,6 @@ Suppose we have a CSL-JSON file with two entries:
 ```json
 [
   {
-    "author": [
-      {
-	"family": "Shannon",
-	"given": "Claude E"
-      }
-    ],
-    "container-title": "The Bell system technical journal",
-    "id": "Shannon1948",
-    "issue": "3",
-    "issued": {
-      "date-parts": [
-	[
-	  1948
-	]
-      ]
-    },
-    "page": "379-423",
-    "title": "A mathematical theory of communication",
-    "type": "article-journal",
-    "volume": "27"
-  },
-  {
     "DOI": "10.1093/mind/LIX.236.433",
     "author": [
       {
@@ -108,26 +86,52 @@ Suppose we have a CSL-JSON file with two entries:
     "title": "I.—Computing Machinery and Intelligence",
     "type": "article-journal",
     "volume": "LIX"
+  },
+  {
+    "author": [
+      {
+	"family": "Shannon",
+	"given": "Claude E"
+      }
+    ],
+    "container-title": "The Bell system technical journal",
+    "id": "Shannon1948",
+    "issue": "3",
+    "issued": {
+      "date-parts": [
+	[
+	  1948
+	]
+      ]
+    },
+    "page": "379-423",
+    "title": "A mathematical theory of communication",
+    "type": "article-journal",
+    "volume": "27"
   }
 ]
 ```
 
 We can produce in-text citations and a reference list in the following way:
 ```markdown
-The concepts of both artificial intelligence {{< cite "Turing1950" >}}
-and information theory {{< cite "Shannon1948" >}} were formally
-introduced in the middle of the twentieth century.
+## Information Theory and AI
+
+The concepts of both information theory {{< cite "Shannon1948" >}} and
+artificial intelligence {{< cite "Turing1950" >}} were formally introduced in
+the middle of the twentieth century. {{< cite "Shannon1948" >}} is considered
+to be Shannon's most influential work.
+
+## References
 
 {{< references >}}
 ```
 
 This will be rendered as
-![rendered version](https://user-images.githubusercontent.com/46974359/117205288-5a5d9600-ade9-11eb-8de7-60beedd45b5e.gif)
+![rendered version](https://user-images.githubusercontent.com/46974359/121787086-07cb8280-cbbc-11eb-994e-542598c65977.gif)
 
 * The tooltip is implemented using standard `title` attribute in an HTML tag.
 * The citations also hyperlink to the entries in the reference list.
 * The same entries can be referenced multiple times in the text; they will appear only once in the reference list.
-* If any entries in `bib.json` aren't referenced, they do not appear in the reference list.
 
 ## Configuration
 

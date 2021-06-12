@@ -1,6 +1,6 @@
 {{- if .title -}}
-{{ .title }}
+{{ .title | markdownify }}
 {{- if .subtitle -}}
-: {{ .subtitle  }}
+: {{ .subtitle | markdownify }}
 {{- end -}}
 {{- end -}}
