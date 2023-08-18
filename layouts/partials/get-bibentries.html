@@ -27,6 +27,8 @@
 
     {{ else if (eq $sorting "json_order")}}
         {{ $bibliography = $bibentries }}
+    {{ else }}
+        {{ errorf "Unknown bibliography sorting: \"%s\". Please check https://github.com/joksas/hugo-simplecite#bibliography" $sorting }}
     {{ end }}
 
 {{ else }}
