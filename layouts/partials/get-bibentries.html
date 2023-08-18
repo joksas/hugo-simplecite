@@ -1,12 +1,36 @@
-{{- $bibentries := "" -}}
+{{ $bibfilePath := path.Join "content" .Page.File.Dir "bib.json" }}
+{{ $bibentries := getJSON $bibfilePath }}
+{{ $bibliography := "" }}
 
-{{- $pageResource := .Page.Resources.GetMatch "bib.json" -}}
-{{- if $pageResource }}
-{{- $constructedBibResource := printf "content/%s%s" .Page.File.Dir $pageResource.Name }}
-{{- $bibfilePath := $constructedBibResource }}
-{{- $bibentries = getJSON $bibfilePath -}}
-{{- else -}}
-{{- errorf "No JSON file was found: %s" .Position -}}
-{{- end -}}
+{{ if $bibentries }}
+    {{ $sorting := .Page.Params.bibliography_sort }}
 
-{{- return $bibentries -}}
+    {{ if or (not $sorting) (eq $sorting "date_descending") }}
+        {{ $tagged_entries := slice }}
+        {{ range $bibentry := $bibentries }}
+            {{ $tagged_entries = $tagged_entries | append
+                (dict "year" (index (index (index (index $bibentry "issued") "date-parts") 0) 0)
+                      "entry" $bibentry
+                )
+            }}
+        {{ end }}
+
+        {{ $sorted_entries := slice }}
+        {{ range $entry:= sort $tagged_entries "year" "desc" }}
+            {{ range $k, $v := $entry }}
+                {{ if eq $k "entry" }}
+                    {{ $sorted_entries = $sorted_entries | append $v }}
+                {{end}}
+            {{ end }}
+        {{ end }}
+        {{ $bibliography = $sorted_entries }}
+
+    {{ else if (eq $sorting "json_order")}}
+        {{ $bibliography = $bibentries }}
+    {{ end }}
+
+{{ else }}
+    {{- errorf "No bib.json file was found at position: %s" .Position -}}
+{{ end }}
+
+{{ return $bibliography }}

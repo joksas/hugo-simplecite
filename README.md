@@ -44,7 +44,12 @@ Name your CSL-JSON file `bib.json` and place it in the same folder as your artic
 
 #### `bibliography`
 
-`{{< bibliography >}}` prints all bibliographic entries in the order that they are specified in `bib.json` as an [unordered list](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul).
+`{{< bibliography >}}` prints all bibliographic entries in `bib.json` as an [unordered HTML list](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul).
+By default, the entries will be sorted by year, in descending order.
+
+The sorting may be controlled with the optional page parameter `bibliography_sort`, with possible values:
+- `"date_descending"` (default): List entries by year, in descending order
+- `"json_order"`: List entries in the same order as in the `bib.json` file
 
 #### `bibentry`
 
