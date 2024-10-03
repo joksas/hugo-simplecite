@@ -1,7 +1,18 @@
-{{ $bibfilePath := path.Join "content" .Page.File.Dir "bib.json" }}
-{{ $bibentries := getJSON $bibfilePath }}
-{{ $bibliography := "" }}
+<!-- Load in the bib.json file as a page resource -->
+{{ $bibentries := "" }}
+{{ $bibfilePath := "bib.json" }}
+{{ with .Page.Resources.Get $bibfilePath }}
+    {{ with .Err }}
+        {{ errorf "Could not parse bib.json file at %q. Encountered the following error:" $bibfilePath . }}
+    {{ else }}
+        {{ $bibentries = . | transform.Unmarshal }}
+    {{ end }}
+{{ else }}
+    {{ errorf "Could not find bib.json file at %q" $bibfilePath }}
+{{ end }}
 
+<!-- Parse the bib.json file -->
+{{ $bibliography := "" }}
 {{ if $bibentries }}
     {{ $sorting := .Page.Params.bibliography_sort }}
 
@@ -32,7 +43,7 @@
     {{ end }}
 
 {{ else }}
-    {{- errorf "No bib.json file was found at position: %s" .Position -}}
+    {{- errorf "No valid bib.json file was found at position: %q" .Page.File.Dir -}}
 {{ end }}
 
 {{ return $bibliography }}
