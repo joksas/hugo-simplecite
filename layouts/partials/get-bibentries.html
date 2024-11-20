@@ -7,6 +7,12 @@
     {{ else }}
         {{ $bibentries = . | transform.Unmarshal }}
     {{ end }}
+{{ else with .Page.Parent.Resources.Get $bibfilePath }}
+    {{ with .Err }}
+        {{ errorf "Could not parse bib.json file at %q. Encountered the following error:" $bibfilePath . }}
+    {{ else }}
+        {{ $bibentries = . | transform.Unmarshal }}
+    {{ end }}
 {{ else }}
     {{ errorf "Could not find bib.json file at %q" $bibfilePath }}
 {{ end }}
