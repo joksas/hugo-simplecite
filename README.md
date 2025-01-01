@@ -25,7 +25,7 @@ theme = ["your", "other", "themes", "hugo-simplecite"]
 
 **Hugo Simple Cite** will work fine without CSS, but a stylesheet can be included to improve the appearance of some of the elements, e.g. to put square brackets around the indices of the ordered list of references. If you wish to include the CSS, insert these two lines in your HTML head template:
 ```html
-{{ $simpleciteStyle := resources.Get "scss/hugo-simplecite.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+{{ $simpleciteStyle := resources.Get "scss/hugo-simplecite.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" type="text/css" href="{{ $simpleciteStyle.Permalink }}">
 ```
 
