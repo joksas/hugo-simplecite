@@ -1,10 +1,10 @@
 <!-- Load in the bib.json file as a page resource -->
 {{ $bibentries := "" }}
 {{ $bibfilePath := "bib.json" }}
-{{ with .Page.Resources.Get $bibfilePath }}
+{{ with try (.Page.Resources.Get $bibfilePath) }}
     {{ with .Err }}
         {{ errorf "Could not parse bib.json file at %q. Encountered the following error:" $bibfilePath . }}
-    {{ else }}
+    {{ else with .Value }}
         {{ $bibentries = . | transform.Unmarshal }}
     {{ end }}
 {{ else with .Page.Parent.Resources.Get $bibfilePath }}
