@@ -1,20 +1,61 @@
 <!-- Load in the bib.json file as a page resource -->
 {{ $bibentries := "" }}
-{{ $bibfilePath := "bib.json" }}
-{{ with try (.Page.Resources.Get $bibfilePath) }}
+{{ $bibfileBaseName := "bib.json" }}
+
+{{ $filename := .Page.File.Path }} {{/* Just for logging */}}
+
+{{/* We're trying to fetch a bib.json from a page bundle contents, or, failing that, from the containing branch bundle's contents
+   *
+   * e.g.  
+   *
+   *  1. animals/dogs/_index.md (branch bundle) will get its bib from animals/dog/bib.json if available
+   *  2. animals/cat/index.md (page bundle) will get its bib from animals/cat/bib.json if available
+   *  3. animals/dogs/german-shepherd.md (in a branch bundle) will get its bib from animals/dog/bib.json if available;
+   *  4. animals/dogs/german-shepherd.md ought NOT to get its bib from animals/bib.json even if animals/ is a bundle with animals/_index.md because animals/dogs/_index.md ought to shadow it
+   * 
+   * we want to ignore everything that's not in a bundle; 
+   */}}
+
+{{ range .Page.Resources }}
+  {{ warnf "%q Found bundle resource: Name=%q | Type=%q | MediaType=%q | Permalink=%q" $filename .Name .ResourceType .MediaType .RelPermalink }}
+{{ end }}
+{{ range .Page.Parent.Resources }}
+  {{/* Note: parent bundle ain't necessarily parent DIR, can be several levels up */}}
+  {{ warnf "%q Found parent bundle resource: Name=%q | Type=%q | MediaType=%q | Permalink=%q" $filename .Name .ResourceType .MediaType .RelPermalink }}
+{{ end }}
+
+{{ $pageBibEntries := "" }}
+{{ $parentBibEntries := "" }}
+
+{{ with try (.Page.Resources.Get $bibfileBaseName) }}
+    {{ warnf "%q Trying to parse bundle-level bib resource: " $filename . }}
     {{ with .Err }}
-        {{ errorf "Could not parse bib.json file at %q. Encountered the following error:" $bibfilePath . }}
+        {{ errorf "%q Could not parse bib.json file at %q. Encountered the following error:" $filename  $bibfileBaseName . }}
     {{ else with .Value }}
-        {{ $bibentries = . | transform.Unmarshal }}
+        {{ $pageBibEntries = . | transform.Unmarshal }}
     {{ end }}
-{{ else with try (.Page.Parent.Resources.Get $bibfilePath) }}
+{{ end }}
+
+{{ with try (.Page.Parent.Resources.Get $bibfileBaseName) }}
+    {{ warnf "%q Trying to parse parent-level bib resource: " $filename  . }}
     {{ with .Err }}
-        {{ errorf "Could not parse bib.json file at %q. Encountered the following error:" $bibfilePath . }}
+        {{ errorf "%q Could not parse parent-level bib.json file at %q. Encountered the following error:" $filename  $bibfileBaseName . }}
     {{ else with .Value }}
-        {{ $bibentries = . | transform.Unmarshal }}
+        {{ $parentBibEntries = . | transform.Unmarshal }}
     {{ end }}
-{{ else }}
-    {{ errorf "Could not find bib.json file at %q" $bibfilePath }}
+{{ end }}
+
+{{/* At this point we have either JSON neatly unmarshaled OR `nil` in parentBibEntries and pageBibEntries, so, in the proper order, we try to use them: */}}
+
+{{ if $pageBibEntries }} 
+        {{ $bibentries = $pageBibEntries}}
+        {{ warnf "%q Using bundle bib.json resource!" $filename  }}
+{{ else if $parentBibEntries }}
+        {{ $bibentries = $parentBibEntries}}
+        {{ warnf "%q Using parent bib.json resource!" $filename  }}
+{{ else }} 
+    {{ errorf "%q No bib.json resource found at either page or branch bundle level :-(" $filename  }}
+    {{/* Both were `nil`. No bueno. */}}
 {{ end }}
 
 <!-- Parse the bib.json file -->
