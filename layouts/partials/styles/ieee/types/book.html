@@ -1,22 +1,27 @@
+{{- $authorPeople := partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
+{{- $editorPeople := partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "editor") -}}
 {{- if index . "author" -}}
-{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
+{{- with $authorPeople -}}
 {{ . }},&#32;
 {{- end -}}
 {{- else if index . "editor" -}}
-{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "editor") -}}
+{{- with $editorPeople -}}
 {{ . }}, Eds.,&#32;
 {{- end -}}
 {{- end -}}
 
-{{- with partial "styles/ieee/parts/full-title" . -}}
+{{- $fullTitle := partial "styles/ieee/parts/full-title" . -}}
+{{- with $fullTitle -}}
 <em>{{ . }}</em>
 {{- end -}}
 
-{{- with partial "styles/ieee/parts/publisher" . -}}
+{{- $publisher := partial "styles/ieee/parts/publisher" . -}}
+{{- with $publisher -}}
 .&#32;{{ . }}
 {{- end -}}
 
-{{- with partial "styles/ieee/parts/year" (dict "bibentries" . "timeFieldName" "issued") -}}
+{{- $year := partial "styles/ieee/parts/year" (dict "bibentries" . "timeFieldName" "issued") -}}
+{{- with $year -}}
 , {{ . }}.&#32;
 {{- end -}}
 

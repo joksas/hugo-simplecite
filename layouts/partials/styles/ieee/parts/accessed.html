@@ -1,3 +1,4 @@
-{{- with partial "styles/ieee/parts/year-month-day" (dict "bibentries" . "timeFieldName" "accessed") -}}
+{{- $yearMonthDay := partial "styles/ieee/parts/year-month-day" (dict "bibentries" . "timeFieldName" "accessed") -}}
+{{- with $yearMonthDay -}}
 [Accessed: {{- . -}}].
 {{- end }}
