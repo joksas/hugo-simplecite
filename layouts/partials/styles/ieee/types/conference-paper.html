@@ -1,8 +1,10 @@
-{{- with partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
+{{- $authorPeople := partial "styles/ieee/parts/people" (dict "bibentries" . "personFieldName" "author") -}}
+{{- with $authorPeople -}}
 {{ . }},&#32;
 {{- end -}}
 
-{{- with partial "styles/ieee/parts/full-title" . -}}
+{{- $fullTitle := partial "styles/ieee/parts/full-title" . -}}
+{{- with $fullTitle -}}
 <q>{{ . }},</q>&#32;
 {{- end -}}
 
@@ -12,7 +14,8 @@ In Proc. {{ . }},&#32;
 
 {{- partial "styles/ieee/parts/year" (dict "bibentries" . "timeFieldName" "issued") -}}
 
-{{- with partial "styles/ieee/parts/volume-issue-pages" . -}}
+{{- $volumeIssue := partial "styles/ieee/parts/volume-issue-pages" . -}}
+{{- with $volumeIssue -}}
 , {{ . }}.&#32;
 {{- end -}}
 
