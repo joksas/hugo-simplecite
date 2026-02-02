@@ -59,6 +59,9 @@ The sorting may be controlled with the optional page parameter `bibliography_sor
 
 `{{< cite "bibentryId" >}}` produces an in-text citation for bibliographic entry with `id` "`bibentryId`". At the moment, only Vancouver (numeric) system is implemented; Harvard (author⁠—date) system (like the one in [Hugo Cite]) may be implemented in the future.
 
+You can also provide the reference portion such as a page as the second positional parameter.
+For example, `{{< cite "bibentryId" "p. 5" >}}` produces an in-text citation for the bibliographic entry with `id` "`bibentryId`" and adds `p. 5` in the citation.
+
 #### `references`
 
 `{{< references >}}` prints bibliographic entries cited in the document as an [ordered list](https://html.com/tags/ol/).

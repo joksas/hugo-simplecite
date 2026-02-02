@@ -7,6 +7,11 @@
 {{- errorf "No bibliographic entry ID was provided: %s" .Position -}}
 {{- end -}}
 
+{{- $referencePortion := "" -}}
+{{- with .Get 1 -}}
+{{- $referencePortion = (print ", " . ) -}}
+{{- end -}}
+
 {{- $bibentries := partial "get-bibentries" . -}}
 
 {{- $numCitedBibentries := 0 -}}
@@ -34,7 +39,7 @@
 {{- end -}}
 
 {{- with $referenceIdx -}}
-[<a class="hugo-simplecite-cite-hyperlink" href="#bibreference-{{ . }}" title="{{ partial "print-bibentry" (dict "context" $context) | plainify | htmlUnescape }}">{{ . }}</a>]
+[<a class="hugo-simplecite-cite-hyperlink" href="#bibreference-{{ . }}" title="{{ partial "print-bibentry" (dict "context" $context "bibentryId" $bibentryId) | plainify | htmlUnescape }}">{{ . }}</a>{{ $referencePortion }}]
 {{- end -}}
 
 {{- else -}}
